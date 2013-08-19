@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>The concept of LiquidPLC</title>
+    <style type="text/css">
+html {  
+  color: black;  
+  background-color: white;  
+  background-image: none;  
+  background-repeat: repeat;  
+  background-attachment: scroll;  
+  background-position: 0% 0%;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {  
+  margin-top: 0px;  
+  margin-right: 0px;  
+  margin-bottom: 0px;  
+  margin-left: 0px;  
+  padding-top: 0px;  
+  padding-right: 0px;  
+  padding-bottom: 0px;  
+  padding-left: 0px;
+}
+
+table {  
+  border-collapse: collapse;  
+  border-spacing: 0px;
+}
+
+fieldset, img {  
+  border-top-width: 0px;  
+  border-right-width: 0px;  
+  border-bottom-width: 0px;  
+  border-left-width: 0px;  
+  border-top-style: none;  
+  border-right-style: none;  
+  border-bottom-style: none;  
+  border-left-style: none;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {  
+  font-style: normal;  
+  font-weight: normal;
+}
+
+li {  
+  list-style-type: none;  
+  list-style-position: outside;  
+  list-style-image: none;
+}
+
+caption, th {  
+  text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {  
+  font-size: 100%;  
+  font-weight: normal;
+}
+
+q:before, q:after {  
+  content: "";
+}
+
+abbr, acronym {  
+  border-top-width: 0px;  
+  border-right-width: 0px;  
+  border-bottom-width: 0px;  
+  border-left-width: 0px;  
+  border-top-style: none;  
+  border-right-style: none;  
+  border-bottom-style: none;  
+  border-left-style: none;  
+  font-variant: normal;
+}
+
+sup {  
+  vertical-align: text-top;
+}
+
+sub {  
+  vertical-align: text-bottom;
+}
+
+input, textarea, select {
+}
+
+input, textarea, select {
+}
+
+legend {  
+  color: black;
+}
+
+del, ins {  
+  text-decoration: none;
+}
+
+body {  
+  font-style: normal;  
+  font-variant: normal;  
+  font-weight: normal;  
+  font-size: 20px;  
+  line-height: 1.231;  
+  font-family: arial, helvetica, clean, sans-serif;
+}
+
+select, input, button, textarea {
+}
+
+table {
+}
+
+pre, code, kbd, samp, tt {  
+  font-family: monospace;  
+  line-height: 100%;
+}
+
+body {  
+  text-align: center;
+}
+
+#ft {  
+  clear: both;
+}
+
+#doc, #doc2, #doc3, #doc4, .yui-t1, .yui-t2, .yui-t3, .yui-t4, .yui-t5, .yui-t6, .yui-t7 {  
+  margin-top: auto;  
+  margin-right: auto;  
+  margin-bottom: auto;  
+  margin-left: auto;  
+  text-align: left;  
+  width: 57.69em;  
+  min-width: 750px;
+}
+
+#doc2 {  
+  width: 73.076em;
+}
+
+#doc3 {  
+  margin-top: auto;  
+  margin-right: 10px;  
+  margin-bottom: auto;  
+  margin-left: 10px;  
+  width: auto;
+}
+
+#doc4 {  
+  width: 74.923em;
+}
+
+.yui-b {  
+  position: relative;
+}
+
+.yui-b {
+}
+
+#yui-main .yui-b {  
+  position: static;
+}
+
+#yui-main, .yui-g .yui-u .yui-g {  
+  width: 100%;
+}
+
+.yui-t1 #yui-main, .yui-t2 #yui-main, .yui-t3 #yui-main {  
+  float: right;  
+  margin-left: -25em;
+}
+
+.yui-t4 #yui-main, .yui-t5 #yui-main, .yui-t6 #yui-main {  
+  float: left;  
+  margin-right: -25em;
+}
+
+.yui-t1 .yui-b {  
+  float: left;  
+  width: 12.3077em;
+}
+
+.yui-t1 #yui-main .yui-b {  
+  margin-left: 13.3077em;
+}
+
+.yui-t2 .yui-b {  
+  float: left;  
+  width: 13.8461em;
+}
+
+.yui-t2 #yui-main .yui-b {  
+  margin-left: 14.8461em;
+}
+
+.yui-t3 .yui-b {  
+  float: left;  
+  width: 23.0769em;
+}
+
+.yui-t3 #yui-main .yui-b {  
+  margin-left: 24.0769em;
+}
+
+.yui-t4 .yui-b {  
+  float: right;  
+  width: 13.8456em;
+}
+
+.yui-t4 #yui-main .yui-b {  
+  margin-right: 14.8456em;
+}
+
+.yui-t5 .yui-b {  
+  float: right;  
+  width: 18.4615em;
+}
+
+.yui-t5 #yui-main .yui-b {  
+  margin-right: 19.4615em;
+}
+
+.yui-t6 .yui-b {  
+  float: right;  
+  width: 23.0769em;
+}
+
+.yui-t6 #yui-main .yui-b {  
+  margin-right: 24.0769em;
+}
+
+.yui-t7 #yui-main .yui-b {  
+  display: block;  
+  margin-top: 0px;  
+  margin-right: 0px;  
+  margin-bottom: 1em;  
+  margin-left: 0px;
+}
+
+#yui-main .yui-b {  
+  float: none;  
+  width: auto;
+}
+
+.yui-gb .yui-u, .yui-g .yui-gb .yui-u, .yui-gb .yui-g, .yui-gb .yui-gb, .yui-gb .yui-gc, .yui-gb .yui-gd, .yui-gb .yui-ge, .yui-gb .yui-gf, .yui-gc .yui-u, .yui-gc .yui-g, .yui-gd .yui-u {  
+  float: left;
+}
+
+.yui-g .yui-u, .yui-g .yui-g, .yui-g .yui-gb, .yui-g .yui-gc, .yui-g .yui-gd, .yui-g .yui-ge, .yui-g .yui-gf, .yui-gc .yui-u, .yui-gd .yui-g, .yui-g .yui-gc .yui-u, .yui-ge .yui-u, .yui-ge .yui-g, .yui-gf .yui-g, .yui-gf .yui-u {  
+  float: right;
+}
+
+.yui-g div.first, .yui-gb div.first, .yui-gc div.first, .yui-gd div.first, .yui-ge div.first, .yui-gf div.first, .yui-g .yui-gc div.first, .yui-g .yui-ge div.first, .yui-gc div.first div.first {  
+  float: left;
+}
+
+.yui-g .yui-u, .yui-g .yui-g, .yui-g .yui-gb, .yui-g .yui-gc, .yui-g .yui-gd, .yui-g .yui-ge, .yui-g .yui-gf {  
+  width: 49.1%;
+}
+
+.yui-gb .yui-u, .yui-g .yui-gb .yui-u, .yui-gb .yui-g, .yui-gb .yui-gb, .yui-gb .yui-gc, .yui-gb .yui-gd, .yui-gb .yui-ge, .yui-gb .yui-gf, .yui-gc .yui-u, .yui-gc .yui-g, .yui-gd .yui-u {  
+  width: 32%;  
+  margin-left: 1.99%;
+}
+
+.yui-gb .yui-u {
+}
+
+.yui-gc div.first, .yui-gd .yui-u {  
+  width: 66%;
+}
+
+.yui-gd div.first {  
+  width: 32%;
+}
+
+.yui-ge div.first, .yui-gf .yui-u {  
+  width: 74.2%;
+}
+
+.yui-ge .yui-u, .yui-gf div.first {  
+  width: 24%;
+}
+
+.yui-g .yui-gb div.first, .yui-gb div.first, .yui-gc div.first, .yui-gd div.first {  
+  margin-left: 0px;
+}
+
+.yui-g .yui-g .yui-u, .yui-gb .yui-g .yui-u, .yui-gc .yui-g .yui-u, .yui-gd .yui-g .yui-u, .yui-ge .yui-g .yui-u, .yui-gf .yui-g .yui-u {  
+  width: 49%;
+}
+
+.yui-g .yui-g .yui-u {  
+  width: 48.1%;
+}
+
+.yui-g .yui-gb div.first, .yui-gb .yui-gb div.first {
+}
+
+.yui-g .yui-gc div.first, .yui-gd .yui-g {  
+  width: 66%;
+}
+
+.yui-gb .yui-g div.first {
+}
+
+.yui-gb .yui-gc div.first, .yui-gb .yui-gd div.first {
+}
+
+.yui-gb .yui-gb .yui-u, .yui-gb .yui-gc .yui-u {
+}
+
+.yui-g .yui-gb .yui-u {
+}
+
+.yui-gb .yui-gd .yui-u {
+}
+
+.yui-gb .yui-gd div.first {
+}
+
+.yui-g .yui-gc .yui-u, .yui-gb .yui-gc .yui-u {  
+  width: 32%;  
+  margin-right: 0px;
+}
+
+.yui-gb .yui-gc div.first {  
+  width: 66%;
+}
+
+.yui-gb .yui-ge .yui-u, .yui-gb .yui-gf .yui-u {  
+  margin-top: 0px;  
+  margin-right: 0px;  
+  margin-bottom: 0px;  
+  margin-left: 0px;
+}
+
+.yui-gb .yui-gb .yui-u {
+}
+
+.yui-gb .yui-g div.first, .yui-gb .yui-gb div.first {
+}
+
+.yui-gc .yui-g .yui-u, .yui-gd .yui-g .yui-u {
+}
+
+.yui-gb .yui-gd div.first {  
+  width: 32%;
+}
+
+.yui-g .yui-gd div.first {
+}
+
+.yui-ge .yui-g {  
+  width: 24%;
+}
+
+.yui-gf .yui-g {  
+  width: 74.2%;
+}
+
+.yui-gb .yui-ge div.yui-u, .yui-gb .yui-gf div.yui-u {  
+  float: right;
+}
+
+.yui-gb .yui-ge div.first, .yui-gb .yui-gf div.first {  
+  float: left;
+}
+
+.yui-gb .yui-ge .yui-u, .yui-gb .yui-gf div.first {
+}
+
+.yui-gb .yui-ge div.first, .yui-gb .yui-gf .yui-u {
+}
+
+.yui-ge div.first .yui-gd .yui-u {  
+  width: 65%;
+}
+
+.yui-ge div.first .yui-gd div.first {  
+  width: 32%;
+}
+
+#bd:after, .yui-g:after, .yui-gb:after, .yui-gc:after, .yui-gd:after, .yui-ge:after, .yui-gf:after {  
+  content: ".";  
+  display: block;  
+  height: 0px;  
+  clear: both;  
+  visibility: hidden;
+}
+
+#bd, .yui-g, .yui-gb, .yui-gc, .yui-gd, .yui-ge, .yui-gf {
+}
+
+</style><style type="text/css">/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.6.0
+*/
+h1{font-size:138.5%;}h2{font-size:123.1%;}h3{font-size:108%;}h1,h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6,strong{font-weight:bold;}abbr,acronym{border-bottom:1px dotted #000;cursor:help;} em{font-style:italic;}blockquote,ul,ol,dl{margin:1em;}ol,ul,dl{margin-left:2em;}ol li{list-style:decimal outside;}ul li{list-style:disc outside;}dl dd{margin-left:1em;}th,td{border:1px solid #000;padding:.5em;}th{font-weight:bold;text-align:center;}caption{margin-bottom:.5em;text-align:center;}p,fieldset,table,pre{margin-bottom:1em;}input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}
+</style><meta content="kernelbee" name="author">
+    <meta content="PLC, vendor lock-in, LiquidPLC, Open Source" name="keywords">
+    <meta content="BlueGriffon wysiwyg editor" name="generator">
+  </head>
+  <body>
+    <div class="yui-t1" id="doc3">
+      <div style="text-align: center;" id="hd">
+        <h1>The concept of Open PLC Software Framework <span style="font-style: italic;">"LiquidPLC</span>"</h1>
+        <p style="text-align: justify;"> </p>
+        <div style="text-align: justify; margin-left: 40px;"><span style="font-weight: normal">The
+            Open PLC Software Framework </span><i><span style="font-weight: normal">LiquidPLC</span></i><i><b>
+            </b></i><span style="font-style: normal"><span style="font-weight: normal">addresses
+the
+              most challenging issue of current PLC market: vendor lock-in.</span></span></div>
+        <p style="margin-bottom: 0in" align="JUSTIFY"><br>
+        </p>
+        <div style="text-align: justify; margin-left: 40px;">The expecting
+          results of employing this concept are: opening PLC as a general
+          industrial computer platform and corresponding cutting costs of PLC
+          hardware and software development and maintenance (including legacy
+          software). </div>
+        <p style="margin-bottom: 0in; font-style: normal; font-weight: normal" align="JUSTIFY"><br>
+        </p>
+        <p style="margin-bottom: 0in; font-style: normal; font-weight: normal" align="JUSTIFY">
+        </p>
+        <div style="text-align: justify; margin-left: 40px;">The general
+          overview of LiquidPLC framework is shown on the following diagram: </div>
+        <p style="margin-bottom: 0in; text-align: justify;"><br>
+        </p>
+        <br>
+        <img title="LiquidPLC" alt="LiquidPLC" src="file:images/LiquidPLC.gif">
+        &nbsp;&nbsp;&nbsp; <br>
+        <br>
+        <div style="text-align: justify;">
+          <p style="margin-bottom: 0in; margin-left: 40px;">LiquidPLC consists
+            of 3 logical parts:</p>
+          <ul>
+            <ul>
+              <ul>
+                <li>
+                  <p style="margin-bottom: 0in;" align="JUSTIFY"><a name="result_box"></a>
+                    <b>PLC PAL</b> (Platform Abstraction Layer): software
+                    abstraction of target platform, implemented in Java class;
+                    it is supposed to be provided by Open Source contributors or
+                    Platform Vendors; the interrupts and system signals are
+                    handled here <span lang="en">through the</span> Java Native
+                    Interface (JNI) and passed further to the other layers (<i><b>PLC
+                        VM, PLC Program</b></i>);</p>
+                </li>
+                <li>
+                  <p style="margin-bottom: 0in;" align="JUSTIFY"><b>PLC VM</b>
+                    (Virtual Machine): software abstraction of vendor specific
+                    PLC, implemented in Java class; it is supposed to be
+                    developed by Open Source contributors, based on data from
+                    PLC programming manuals (memory map, instructions set,
+                    programming model);</p>
+                </li>
+                <li><span style="font-weight: bold;">PLC Program</span>: it is a
+                  result of automatic conversion of given PLC program (in form
+                  of Ladder Logic diagram or any other IEC 61131-3 language) to
+                  Java class; for legacy systems it is mainly based on reverse
+                  engineering of Vendor specific PLC program/project file
+                  formats; industry automation engineers will work with PLC
+                  programs in the same way as they did it before: in form of PLC
+                  specific IEC 61131-3 languages; then, it will be automatically
+                  converted to Java and compiled to Java bytecode under the hood
+                  of LiquidPLC framework; </li>
+                <br>
+              </ul>
+            </ul>
+          </ul>
+          <div style="margin-left: 40px;"> The PLC program conversion software
+            (from Vendor specific file format to Java) will consist of 2 main
+            parts: specific file format parser (on input) and Java file
+            generator (on outpwill be supported by powerful community of Open
+            Source contributors). </div>
+          <div style="margin-left: 40px;"> <br>
+            The conversion software will naturally employ specific PLC VM
+            implementation for corresponding PLC (memory map, instruction set,
+            programming model), but the core algorithms of corresponding Java
+            code generating are common for any PLC and can be based on similar
+            algorithms of existing PLC programs converters/compilers to C code.<br>
+            <br>
+          </div>
+          <div style="margin-left: 40px;"><span style="font-weight: bold;">Main
+              advantages of the LiquidPLC concept:<br>
+            </span>
+            <ul>
+              <ul>
+                <li>provides openness of PLC platforms, qualitative
+                  specialization and healthy competition on the market of PLC
+                  hardware and software, just as it happened on the PC market in
+                  1980's;</li>
+              </ul>
+              <ul>
+                <li>absolute portability of PLC programs between similar
+                  hardware platforms;</li>
+              </ul>
+              <ul>
+                <li>automatic portability of legacy PLC programs to new suitable
+                  platforms without loss of quality and cost; in other words,
+                  maintaining previously made investments in the already
+                  running, time-tested industrial software;</li>
+              </ul>
+              <ul>
+                <li>will be supported and driven by powerful community of Open
+                  Source contributors, including such big players as hardware
+                  vendors, just as it going on with Linux kernel now.</li>
+              </ul>
+            </ul>
+            <p> As a result, it will allow cutting of prime cost in main areas
+              of industry. </p>
+            <ul>
+            </ul>
+            <span style="font-weight: bold;"> </span> </div>
+          <h2 style="margin-left: 40px;">References</h2>
+          <p style="margin-left: 40px;"> The draft implementation of LiquidPLC
+            framefork on <a href="https://github.com/kernelbee">my GitHub
+              account</a>: </p>
+          <ul style="margin-left: 40px;">
+            <ul>
+              <ul>
+                <li>The whole framework: <a href="https://github.com/kernelbee/LiquidPLC">LiquidPLC</a>;</li>
+                <li>PLC PAL: <a href="https://github.com/kernelbee/LiquidPLC/blob/master/src/com/kernelbee/plc/hw/Platform.java">Platform.java</a>;</li>
+                <li>PLC VM: <a href="https://github.com/kernelbee/LiquidPLC/blob/master/src/com/kernelbee/plc/vm/PLCVM.java">PLCVM.java</a>;</li>
+                <li>naive example of PLC Program in Java: <a href="https://github.com/kernelbee/LiquidPLC/blob/master/plcprogram/PLCProgram.java">PLCProgram.java</a>;</li>
+                <li>Koyo CLICK PLC program file parser: <a href="https://github.com/kernelbee/KoyoCLICK">KoyoCLICK</a>;</li>
+                <li>Mitsubishi FX3x PLC program files parser: <a href="https://github.com/kernelbee/MitsubishiFX3">MitsubishiFX3</a>;</li>
+              </ul>
+            </ul>
+          </ul>
+          <p style="margin-left: 40px;"> The existing PLC programs
+            converters/compilers to C code, as starting point for programming of
+            Java code generation:&nbsp;</p>
+          <ul>
+            <ul>
+              <ul>
+                <li>http://www.cq.cx/ladder.pl</li>
+                <li>http://sourceforge.net/projects/ldcompiler/</li>
+                <li>http://gebautomation.com/pub/index</li>
+              </ul>
+            </ul>
+          </ul>
+          <p style="margin-left: 40px; text-align: center;">Please, send me your
+            feedback:</p>
+          <p style="margin-left: 40px; text-align: center;"><img alt="mailto" src="images/send_to.gif"></p>
+          <ul>
+            <ul>
+              <ul>
+              </ul>
+            </ul>
+          </ul>
+          <ul style="margin-left: 40px;">
+            <ul>
+              <ul>
+              </ul>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
